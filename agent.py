@@ -9,6 +9,7 @@ import torch.optim as optim
 import os
 import argparse
 import random
+import itertools
 
 if torch.backends.mps.is_available():
     device = "mps"
@@ -33,6 +34,7 @@ class Agent:
 
         self.epsilon_decay = params["epsilon_decay"]
         self.replay_memory_size = params["replay_memory_size"]
+        self.gamma = params["gamma"]
 
         self.mini_batch_size = params["mini_batch_size"]
         self.network_sync_rate = params["network_sync_rate"]
@@ -87,7 +89,7 @@ class Agent:
                 reward = torch.tensor(reward,dtype=torch.float,device=device)
 
                 if is_training:
-                    memory.append(state,action,next_state,reward,terminated)
+                    memory.append((state,action,next_state,reward,terminated))
                     steps += 1
 
                 state = next_state

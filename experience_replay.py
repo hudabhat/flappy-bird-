@@ -1,7 +1,7 @@
 from collections import deque
 import random
 
-def ReplayMemory():
+class ReplayMemory:
     #create FIFO queue - experience replay
     def __init__(self,maxlen,seed=None):
         self.memory = deque([],maxlen=maxlen)

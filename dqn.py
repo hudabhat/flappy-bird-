@@ -11,5 +11,5 @@ class DQN(nn.Module):
             nn.ReLU(),
             nn.Linear(hidden_dim,action_dim)
         )
-        def forward(self,x):
-            return self.model(x)
+    def forward(self,x):
+        return self.model(x)
